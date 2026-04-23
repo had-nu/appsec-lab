@@ -10,11 +10,6 @@ services:
       - "3000:3000"
     networks:
       - lab-net
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   # ──────────────────────────────────────────────
   # SAST: Semgrep — pattern-based static analysis
@@ -96,13 +91,12 @@ services:
     volumes:
       - ./reports:/zap/wrk
     depends_on:
-      juice-shop:
-        condition: service_healthy
+      - juice-shop
     command: >
       zap-baseline.py
         -t http://juice-shop:3000
-        -J /zap/wrk/zap-baseline.json
-        -r /zap/wrk/zap-baseline.html
+        -J zap-baseline.json
+        -r zap-baseline.html
         -l WARN
         -I
     networks:

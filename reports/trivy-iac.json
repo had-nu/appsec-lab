@@ -1,0 +1,19 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.70.0"
+  },
+  "ReportID": "019dbc37-930b-77a9-b4c6-1e0907b0d739",
+  "CreatedAt": "2026-04-23T21:20:51.979511531Z",
+  "ArtifactID": "sha256:45224ecd18d985987947805085e5a2dc80d31b2b520b66062b301ede39baeff9",
+  "ArtifactName": "/workspace",
+  "ArtifactType": "repository",
+  "Metadata": {
+    "RepoURL": "git@github.com:had-nu/appsec-lab.git",
+    "Branch": "main",
+    "Commit": "67e9dd06128036749c7f04378b17a9709dc7cb76",
+    "CommitMsg": "fix: SAST scanners integration and permissions",
+    "Author": "hadnu \u003candre_ataide@proton.me\u003e",
+    "Committer": "hadnu \u003candre_ataide@proton.me\u003e"
+  }
+}

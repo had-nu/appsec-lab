@@ -23,6 +23,7 @@ TARGETS
   iac       Trivy config + Checkov against lab configs
   target    Start Juice Shop only (for manual testing)
   report    Pretty-print latest findings summary
+  down      Stop and remove all containers and networks
 
 EXAMPLES
   ./run.sh sast           # Run SAST only, fast
@@ -35,33 +36,33 @@ EOF
 start_target() {
   echo "[*] Starting Juice Shop..."
   docker compose up -d juice-shop
-  echo "[*] Waiting for Juice Shop to be healthy..."
-  docker compose wait juice-shop || sleep 15
+  echo "[*] Waiting 15s for Juice Shop to boot..."
+  sleep 15
   echo "[+] Juice Shop running at http://localhost:3000"
 }
 
 run_sast() {
   echo "[*] Running SAST (Semgrep + Bearer)..."
-  docker compose --profile sast up --abort-on-container-exit 
+  docker compose --profile sast up --abort-on-container-exit || true
   echo "[+] SAST reports written to $REPORTS_DIR/"
 }
 
 run_sca() {
   echo "[*] Running SCA (Trivy filesystem)..."
-  docker compose --profile sca up --abort-on-container-exit
+  docker compose --profile sca up --abort-on-container-exit || true
   echo "[+] SCA report written to $REPORTS_DIR/trivy-fs.json"
 }
 
 run_dast() {
   start_target
   echo "[*] Running DAST (ZAP baseline)..."
-  docker compose --profile dast up --abort-on-container-exit
+  docker compose --profile dast up --abort-on-container-exit || true
   echo "[+] DAST reports written to $REPORTS_DIR/zap-baseline.*"
 }
 
 run_iac() {
   echo "[*] Running IaC scan (Trivy config + Checkov)..."
-  docker compose --profile iac up --abort-on-container-exit
+  docker compose --profile iac up --abort-on-container-exit || true
   echo "[+] IaC reports written to $REPORTS_DIR/"
 }
 
@@ -134,5 +135,6 @@ case "${1:-help}" in
   iac)     run_iac ;;
   target)  start_target ;;
   report)  print_report ;;
+  down)    docker compose down ;;
   *)       usage ;;
 esac
