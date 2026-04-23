@@ -299,20 +299,19 @@ Fazer isto para pelo menos 3 findings diferentes. É o exercício mais important
 **Objectivo:** Simular a entrevista. As respostas a seguir são apenas um guia, não são para decorar.
 
 1. *"Um SAST devolve 300 findings. Como começas?"*
-> Prioritização por severidade, criticidade, localização e dependências.
+    > Prioritização por severidade, criticidade, localização e dependências.
 
 2. *"Dois dias antes de um release, aparece uma SQL injection num endpoint autenticado de backoffice. O que fazes?"*
-> 
+    > 
 
 3. *"O que é que o DORA exige em termos de gestão de risco ICT aplicacional?"*
-> 
+    > 
 
 4. *"Como integrarias um SAST num pipeline sem bloquear o delivery de forma cega?"*
-> 
+    > 
 
 5. *"Explica a diferença prática entre SAST e DAST a um gestor de negócio."*
-
-> SAST encontra problemas no código antes de existir aplicação em execução — é análise do potencial. DAST testa a aplicação real em execução — é validação do comportamento. Um não substitui o outro.
+    > SAST encontra problemas no código antes de existir aplicação em execução — é análise do potencial. DAST testa a aplicação real em execução — é validação do comportamento. Um não substitui o outro.
 
 ---
 
