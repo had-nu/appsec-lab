@@ -6,6 +6,7 @@ set -euo pipefail
 
 REPORTS_DIR="./reports"
 mkdir -p "$REPORTS_DIR"
+chmod 777 "$REPORTS_DIR"
 
 usage() {
   cat <<EOF
@@ -41,7 +42,7 @@ start_target() {
 
 run_sast() {
   echo "[*] Running SAST (Semgrep + Bearer)..."
-  docker compose --profile sast up --abort-on-container-exit
+  docker compose --profile sast up --abort-on-container-exit 
   echo "[+] SAST reports written to $REPORTS_DIR/"
 }
 
@@ -73,6 +74,16 @@ print_report() {
   if [ -f "$REPORTS_DIR/semgrep.json" ]; then
     COUNT=$(python3 -c "import json,sys; d=json.load(open('$REPORTS_DIR/semgrep.json')); print(len(d.get('results',[])))" 2>/dev/null || echo "?")
     echo "  Semgrep findings : $COUNT"
+  fi
+
+  if [ -f "$REPORTS_DIR/bearer.json" ]; then
+    COUNT=$(python3 -c "
+import json,sys
+d=json.load(open('$REPORTS_DIR/bearer.json'))
+total=len(d.get('critical',[])) + len(d.get('high',[])) + len(d.get('medium',[])) + len(d.get('low',[]))
+print(total)
+" 2>/dev/null || echo "?")
+    echo "  Bearer findings  : $COUNT"
   fi
 
   if [ -f "$REPORTS_DIR/trivy-fs.json" ]; then

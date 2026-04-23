@@ -32,6 +32,7 @@ services:
         --json
         --output=/reports/semgrep.json
         --severity=WARNING
+        --no-git-ignore
         /src
     profiles: ["sast"]
 
