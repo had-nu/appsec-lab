@@ -253,7 +253,7 @@ Para cada CVE HIGH/CRITICAL em `reports/trivy-fs.json`:
 
 **Pergunta-chave para a entrevista:** *"Um vendor diz que um CVE crítico não é explorável no vosso contexto. Como validas?"*
 
-Resposta correcta: attack vector + privileges required + qual dado/função exposta + log de acesso ao componente. Não aceitas a afirmação sem evidência.
+Resposta provável: attack vector + privileges required + qual dado/função exposta + log de acesso ao componente. Não aceitas a afirmação sem evidência.
 
 ---
 
@@ -296,17 +296,23 @@ Fazer isto para pelo menos 3 findings diferentes. É o exercício mais important
 
 ### Dia 5 — Mock + revisão de gaps
 
-**Objectivo:** Simular a entrevista.
-
-Responder em voz alta (literalmente, falar) a estas perguntas:
+**Objectivo:** Simular a entrevista. As respostas a seguir são apenas um guia, não são para decorar.
 
 1. *"Um SAST devolve 300 findings. Como começas?"*
+> Prioritização por severidade, criticidade, localização e dependências.
+
 2. *"Dois dias antes de um release, aparece uma SQL injection num endpoint autenticado de backoffice. O que fazes?"*
+> 
+
 3. *"O que é que o DORA exige em termos de gestão de risco ICT aplicacional?"*
+> 
+
 4. *"Como integrarias um SAST num pipeline sem bloquear o delivery de forma cega?"*
+> 
+
 5. *"Explica a diferença prática entre SAST e DAST a um gestor de negócio."*
 
-Para a pergunta 5, a resposta correcta é: SAST encontra problemas no código antes de existir aplicação em execução — é análise do potencial. DAST testa a aplicação real em execução — é validação do comportamento. Um não substitui o outro.
+> SAST encontra problemas no código antes de existir aplicação em execução — é análise do potencial. DAST testa a aplicação real em execução — é validação do comportamento. Um não substitui o outro.
 
 ---
 
@@ -331,7 +337,7 @@ Para a pergunta 5, a resposta correcta é: SAST encontra problemas no código an
 
 ---
 
-## Referências rápidas para a entrevista
+## Referências rápidas
 
 **CWEs mais comuns em SAST:**
 - CWE-89: SQL Injection
@@ -351,3 +357,10 @@ Para a pergunta 5, a resposta correcta é: SAST encontra problemas no código an
 - Art. 9: Protecção e prevenção (onde os controlos SAST/SCA vivem)
 - Art. 10: Detecção (onde o DAST e monitoring vivem)
 - Art. 17: Gestão de incidentes (o que fazer depois de um incidente aplicacional)
+
+**ISO 27001:2022 — Controlos AppSec (Anexo A):**
+- 8.25: Secure system development lifecycle (Integração de segurança no SDLC)
+- 8.26: Application security requirements (Definição de requisitos de segurança antes do código)
+- 8.27: Secure system architecture and engineering principles (Arquitetura segura)
+- 8.28: Secure coding (Práticas de código seguro e validação através de ferramentas como SAST)
+- 8.29: Security testing in development and acceptance (Validação através de DAST, SCA e pentests)
