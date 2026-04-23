@@ -1,8 +1,134 @@
-# version: '3.8'
 services:
-  sast-toolkit:
-    build: .
+
+  # ──────────────────────────────────────────────
+  # TARGET: OWASP Juice Shop (deliberately vulnerable app)
+  # Accessible at http://localhost:3000
+  # ──────────────────────────────────────────────
+  juice-shop:
+    image: bkimminich/juice-shop:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - lab-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ──────────────────────────────────────────────
+  # SAST: Semgrep — pattern-based static analysis
+  # Scans source code in ./src for security issues
+  # Output: reports/semgrep.json
+  # ──────────────────────────────────────────────
+  semgrep:
+    image: returntocorp/semgrep:latest
     volumes:
-      - ./src:/app/src
-      - ./config:/app/config
-    entrypoint: ["bearer", "scan", "--config-file", "/app/config/bearer-config.yml", "/app/src"]
+      - ./src:/src:ro
+      - ./reports:/reports
+    command: >
+      semgrep scan
+        --config=auto
+        --json
+        --output=/reports/semgrep.json
+        --severity=WARNING
+        /src
+    profiles: ["sast"]
+
+  # ──────────────────────────────────────────────
+  # SAST: Bearer — privacy/security focused SAST
+  # Particularly good at data flow and sensitive data exposure
+  # Output: reports/bearer.json
+  # ──────────────────────────────────────────────
+  bearer:
+    image: bearer/bearer:latest
+    volumes:
+      - ./src:/app/src:ro
+      - ./config:/app/config:ro
+      - ./reports:/app/reports
+    command: >
+      scan /app/src
+        --config-file=/app/config/bearer-config.yml
+        --format=json
+        --output=/app/reports/bearer.json
+    profiles: ["sast"]
+
+  # ──────────────────────────────────────────────
+  # SCA: Trivy — dependency + container vulnerability scanner
+  # Runs three modes: fs (dependencies), image (container), config (IaC)
+  # Output: reports/trivy-*.json
+  # ──────────────────────────────────────────────
+  trivy-fs:
+    image: aquasec/trivy:latest
+    volumes:
+      - ./src:/src:ro
+      - ./reports:/reports
+      - trivy-cache:/root/.cache/trivy
+    command: >
+      fs /src
+        --format json
+        --output /reports/trivy-fs.json
+        --severity HIGH,CRITICAL
+        --scanners vuln,secret
+    profiles: ["sca"]
+
+  trivy-iac:
+    image: aquasec/trivy:latest
+    volumes:
+      - ./:/workspace:ro
+      - ./reports:/reports
+      - trivy-cache:/root/.cache/trivy
+    command: >
+      config /workspace
+        --format json
+        --output /reports/trivy-iac.json
+        --severity HIGH,CRITICAL
+    profiles: ["iac"]
+
+  # ──────────────────────────────────────────────
+  # DAST: OWASP ZAP — dynamic application security testing
+  # Runs a baseline scan against the live Juice Shop
+  # Output: reports/zap-baseline.json + zap-baseline.html
+  # ──────────────────────────────────────────────
+  zap:
+    image: ghcr.io/zaproxy/zaproxy:stable
+    volumes:
+      - ./reports:/zap/wrk
+    depends_on:
+      juice-shop:
+        condition: service_healthy
+    command: >
+      zap-baseline.py
+        -t http://juice-shop:3000
+        -J /zap/wrk/zap-baseline.json
+        -r /zap/wrk/zap-baseline.html
+        -l WARN
+        -I
+    networks:
+      - lab-net
+    profiles: ["dast"]
+
+  # ──────────────────────────────────────────────
+  # IaC: Checkov — IaC misconfiguration scanner
+  # Scans Dockerfiles, Compose files, GitHub Actions
+  # Output: reports/checkov.json
+  # ──────────────────────────────────────────────
+  checkov:
+    image: bridgecrew/checkov:latest
+    volumes:
+      - ./:/workspace:ro
+      - ./reports:/reports
+    command: >
+      -d /workspace
+        --output json
+        --output-file-path /reports
+        --quiet
+        --framework dockerfile,github_actions,secrets
+    profiles: ["iac"]
+
+networks:
+  lab-net:
+    driver: bridge
+
+volumes:
+  trivy-cache:

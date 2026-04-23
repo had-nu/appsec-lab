@@ -1,0 +1,16 @@
+scan:
+  # Target filetypes
+  scanner:
+    - secrets
+    - sast
+  # Skip test files to reduce noise
+  skip-test: true
+
+report:
+  severity:
+    - critical
+    - high
+    - medium
+
+output:
+  format: json
