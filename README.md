@@ -281,7 +281,7 @@ Para os findings IaC:
 
 **Objectivo:** Converter output técnico em decisão de risco no contexto DORA.
 
-Exercício prático — para cada categoria de finding encontrada, escrever uma frase que responderia ao Sir de SI:
+Exercício prático — para cada categoria de finding encontrada, escrever uma frase que responderia ao Diretor de SI:
 
 > *"Encontrámos X instâncias de [tipo de vulnerabilidade] na aplicação [Y]. Em termos de risco, isto significa [impacto de negócio]. Recomendo [acção] porque [justificação]. Se optarmos por aceitar o risco temporariamente, o registo de risco deve incluir [owner, prazo, critério de reabertura]."*
 
