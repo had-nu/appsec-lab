@@ -10,7 +10,7 @@
 ## 1. Identificação das Partes
 
 **Root Security Governance Advisory**
-André Ataíde — Especialista AppSec/GRC
+Nome Nome — Função
 
 **Aethon Security, S.A.**
 Sede: Lisboa
@@ -55,7 +55,7 @@ Avaliação de conformidade com o Regulamento (UE) 2024/2847 — Cyber Resilienc
 
 ## 4. Equipa
 
-- **André Ataíde** — Especialista AppSec/GRC (ponto de contacto)
+- **Nome Nome** — Função (ponto de contacto)
 
 ---
 
