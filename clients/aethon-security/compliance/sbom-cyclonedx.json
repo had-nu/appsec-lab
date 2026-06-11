@@ -1,0 +1,73 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "serialNumber": "urn:uuid:7a42e687-495c-42f5-b30f-b58921a79c89",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-06-11T10:00:00Z",
+    "tools": [
+      {
+        "vendor": "Aethon Security",
+        "name": "sbom-generator",
+        "version": "2.0"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "AethonShield",
+      "version": "3.1.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "express",
+      "version": "4.18.2",
+      "purl": "pkg:npm/express@4.18.2"
+    },
+    {
+      "type": "library",
+      "name": "passport",
+      "version": "0.7.0",
+      "purl": "pkg:npm/passport@0.7.0"
+    },
+    {
+      "type": "library",
+      "name": "helmet",
+      "version": "7.1.0",
+      "purl": "pkg:npm/helmet@7.1.0"
+    },
+    {
+      "type": "library",
+      "name": "express-session",
+      "version": "1.18.0",
+      "purl": "pkg:npm/express-session@1.18.0"
+    },
+    {
+      "type": "library",
+      "name": "winston",
+      "version": "3.11.0",
+      "purl": "pkg:npm/winston@3.11.0"
+    },
+    {
+      "type": "library",
+      "name": "crypto",
+      "version": "built-in",
+      "purl": "pkg:npm/crypto@built-in"
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "pkg:npm/express@4.18.2",
+      "dependsOn": [
+        "pkg:npm/passport@0.7.0",
+        "pkg:npm/express-session@1.18.0",
+        "pkg:npm/helmet@7.1.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/winston@3.11.0",
+      "dependsOn": []
+    }
+  ]
+}

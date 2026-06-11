@@ -1,0 +1,15 @@
+# Wardex SBOM validation policy — Aethon Security
+# AethonShield v3.1 — Class II requires auditable SBOM
+
+sbom_requirements:
+  format: "cyclonedx"
+  version: "1.5"
+  required_fields:
+    - "bomFormat"
+    - "specVersion"
+    - "serialNumber"
+    - "version"
+    - "components"
+    - "metadata"
+  min_components: 10
+  require_signature: true

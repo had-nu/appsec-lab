@@ -121,6 +121,23 @@ services:
         --framework dockerfile,github_actions,secrets
     profiles: ["iac"]
 
+  # ──────────────────────────────────────────────
+  # CRA: Wardex — compliance gate for CRA Art. 14
+  # Evaluates vulnerability reports against KEV/EPSS thresholds
+  # Requires CLIENT env var (e.g. nexus-dynamics)
+  # Output: clients/${CLIENT}/reports/wardex-report.json
+  # ──────────────────────────────────────────────
+  wardex:
+    build:
+      context: .
+      dockerfile: Dockerfile.wardex
+    volumes:
+      - ./clients/${CLIENT}/wardex:/workspace
+      - ./clients/${CLIENT}/reports:/workspace/reports
+    environment:
+      - WARDEX_ACTOR=${USER:-practitioner}
+    profiles: ["wardex"]
+
 networks:
   lab-net:
     driver: bridge

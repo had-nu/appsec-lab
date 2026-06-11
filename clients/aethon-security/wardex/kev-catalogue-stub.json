@@ -1,0 +1,22 @@
+{
+  "catalog": [
+    {
+      "cve_id": "CVE-2025-9876",
+      "vendor": "Aethon Security",
+      "product": "AethonShield",
+      "known_exploited": true,
+      "date_added": "2026-02-10",
+      "short_description": "RCE in endpoint agent log parser allowing lateral movement"
+    },
+    {
+      "cve_id": "CVE-2025-4321",
+      "vendor": "Multiple",
+      "product": "Node.js",
+      "known_exploited": true,
+      "date_added": "2026-05-01",
+      "short_description": "HTTP request smuggling in Node.js < 22"
+    }
+  ],
+  "last_updated": "2026-06-01",
+  "source": "CISA KEV catalogue (educational stub)"
+}

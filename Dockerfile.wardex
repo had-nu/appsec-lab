@@ -1,0 +1,32 @@
+# Stage 1 — Build
+FROM golang:1.26-alpine AS builder
+
+RUN apk add --no-cache git ca-certificates tzdata
+
+WORKDIR /build
+
+# Clone wardex repo (tagged release for reproducibility)
+RUN git clone --depth 1 --branch v2.0.1 https://github.com/had-nu/wardex.git .
+
+# Cache go modules
+RUN go mod download
+
+# Build — main() at root (main.go)
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
+    go build -trimpath -ldflags="-s -w" -o wardex .
+
+# Stage 2 — Runtime
+FROM alpine:3.21
+
+RUN apk add --no-cache ca-certificates tzdata
+
+RUN addgroup -S wardex && adduser -S wardex -G wardex
+
+WORKDIR /workspace
+COPY --from=builder /build/wardex /usr/local/bin/wardex
+
+RUN chown wardex:wardex /workspace
+USER wardex
+
+ENTRYPOINT ["wardex"]
+CMD ["--help"]

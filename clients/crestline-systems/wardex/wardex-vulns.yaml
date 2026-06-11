@@ -1,0 +1,45 @@
+# Vulnerabilities found in EdgeSentry v1.4 — SAST + SCA scan results
+# IIoT gateway management software — critical infrastructure context
+
+vulnerabilities:
+  - cve_id: "CWE-89"
+    cvss_base: 9.8
+    epss_score: 0.92
+    component: "src/sample-vulnerable.js (SQL injection)"
+    reachable: true
+
+  - cve_id: "CWE-79"
+    cvss_base: 6.1
+    epss_score: 0.78
+    component: "src/sample-vulnerable.js (XSS)"
+    reachable: true
+
+  - cve_id: "CWE-798"
+    cvss_base: 7.5
+    epss_score: 0.45
+    component: "src/sample-vulnerable.js (hardcoded credentials)"
+    reachable: true
+
+  - cve_id: "CWE-22"
+    cvss_base: 7.5
+    epss_score: 0.34
+    component: "src/sample-vulnerable.js (path traversal)"
+    reachable: true
+
+  - cve_id: "CWE-916"
+    cvss_base: 5.9
+    epss_score: 0.21
+    component: "src/sample-vulnerable.js (weak hashing)"
+    reachable: true
+
+  - cve_id: "CWE-614"
+    cvss_base: 5.3
+    epss_score: 0.15
+    component: "src/sample-vulnerable.js (insecure cookie)"
+    reachable: true
+
+  - cve_id: "CWE-287"
+    cvss_base: 7.3
+    epss_score: 0.52
+    component: "src/sample-vulnerable.js (weak auth)"
+    reachable: true

@@ -1,0 +1,6 @@
+reports/
+clients/*/reports/
+*.log
+.env
+.trivycache/
+*.zip

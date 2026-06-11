@@ -1,0 +1,9 @@
+# Nexus Dynamics — implemented controls for Wardex evaluation
+controls:
+  - id: "A.8.28"
+    name: "Secure Coding"
+    framework: "iso27001"
+    maturity: 2
+    implemented: true
+    effectiveness: 0.3
+    justification: "SAST pipeline recently implemented — no historical coverage"

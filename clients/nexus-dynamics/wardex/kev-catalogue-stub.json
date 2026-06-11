@@ -1,0 +1,14 @@
+{
+  "catalog": [
+    {
+      "cve_id": "CVE-2024-1234",
+      "vendor": "Nexus Dynamics",
+      "product": "NexusFlow",
+      "known_exploited": true,
+      "date_added": "2026-03-15",
+      "short_description": "SQL injection in search endpoint allowing unauthenticated RCE"
+    }
+  ],
+  "last_updated": "2026-06-01",
+  "source": "CISA KEV catalogue (educational stub)"
+}

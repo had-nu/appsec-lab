@@ -1,0 +1,31 @@
+{
+  "artefact_type": "Art. 14 — Notification of Exploited Vulnerability",
+  "product": "NexusFlow",
+  "version": "2.3",
+  "manufacturer": {
+    "name": "Nexus Dynamics, Lda.",
+    "nif": "999123456",
+    "contact": "security@nexusdynamics.pt"
+  },
+  "vulnerability": {
+    "cve_id": "",
+    "cvss_score": null,
+    "epss_score": null,
+    "component": "",
+    "description": "",
+    "known_exploited": false,
+    "date_identified": ""
+  },
+  "notification": {
+    "date_sent": "",
+    "sent_to": "csirt@cncs.gov.pt",
+    "method": "email",
+    "status": "draft"
+  },
+  "mitigation": {
+    "available": false,
+    "description": "",
+    "deadline": ""
+  },
+  "notes": ""
+}

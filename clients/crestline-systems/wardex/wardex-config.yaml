@@ -1,0 +1,15 @@
+# Wardex Configuration — Crestline Systems
+# CRA Art. 13 + Art. 14 compliance gate with SBOM check
+
+thresholds:
+  critical_vulnerabilities: 0
+  high_vulnerabilities: 1
+
+output:
+  format: "json"
+  file: "wardex-report.json"
+  roadmap_limit: 15
+
+security:
+  enforce_actor_trust: true
+  fail_close_default: 1.0

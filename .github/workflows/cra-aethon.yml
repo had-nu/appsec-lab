@@ -1,0 +1,67 @@
+name: CRA — Aethon Security
+
+on:
+  push:
+    paths:
+      - 'clients/aethon-security/**'
+      - 'src/**'
+  workflow_dispatch:
+
+env:
+  CLIENT: aethon-security
+
+jobs:
+  pre-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate artifact envelope
+        run: ./run.sh cra-check
+
+  sast:
+    needs: pre-eval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh sast
+
+  sca:
+    needs: pre-eval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh sca
+
+  iac:
+    needs: pre-eval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh iac
+
+  wardex-gate:
+    needs: [sast, sca]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh wardex
+
+  compliance-check:
+    needs: wardex-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify EU Declaration of Conformity
+        run: |
+          test -f "clients/$CLIENT/compliance/annex-v-eu-declaration.md" || echo "EU declaration missing"
+      - name: Verify third-party eval brief
+        run: |
+          test -f "clients/$CLIENT/compliance/third-party-eval-brief.md" || echo "3rd party eval brief missing"
+      - run: ./run.sh compliance-report
+
+  report:
+    needs: [sast, sca, iac, wardex-gate, compliance-check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh report

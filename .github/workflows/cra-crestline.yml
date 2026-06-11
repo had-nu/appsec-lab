@@ -1,0 +1,79 @@
+name: CRA — Crestline Systems
+
+on:
+  push:
+    paths:
+      - 'clients/crestline-systems/**'
+      - 'src/**'
+  workflow_dispatch:
+
+env:
+  CLIENT: crestline-systems
+
+jobs:
+  pre-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate artifact envelope (incl. SBOM)
+        run: |
+          ./run.sh cra-check
+          test -f "clients/$CLIENT/compliance/sbom-cyclonedx.json" || echo "SBOM missing"
+
+  sast:
+    needs: pre-eval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh sast
+
+  sca:
+    needs: pre-eval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh sca
+
+  iac:
+    needs: pre-eval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh iac
+
+  sbom-check:
+    needs: pre-eval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate SBOM presence
+        run: |
+          echo "[*] Checking SBOM for $CLIENT..."
+          python3 -c "
+import json
+with open('clients/$CLIENT/compliance/sbom-cyclonedx.json') as f:
+    sbom = json.load(f)
+print(f'  SBOM format: {sbom.get(\"bomFormat\", \"unknown\")}')
+print(f'  Components: {len(sbom.get(\"components\", []))}')
+" || echo "[!] SBOM validation failed"
+
+  wardex-gate:
+    needs: [sast, sca, sbom-check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh wardex
+
+  compliance-check:
+    needs: wardex-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh compliance-report
+
+  report:
+    needs: [sast, sca, iac, wardex-gate, compliance-check]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./run.sh report

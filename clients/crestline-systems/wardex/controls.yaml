@@ -1,0 +1,16 @@
+# Crestline Systems — implemented controls for Wardex evaluation
+controls:
+  - id: "A.8.28"
+    name: "Secure Coding"
+    framework: "iso27001"
+    maturity: 3
+    implemented: true
+    effectiveness: 0.5
+    justification: "SAST + SCA pipeline operational"
+  - id: "A.8.30"
+    name: "Outsourced Development"
+    framework: "iso27001"
+    maturity: 2
+    implemented: true
+    effectiveness: 0.4
+    justification: "SBOM generation implemented but not yet verified"

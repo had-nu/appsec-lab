@@ -1,0 +1,22 @@
+{
+  "catalog": [
+    {
+      "cve_id": "CVE-2024-5678",
+      "vendor": "Crestline Systems",
+      "product": "EdgeSentry",
+      "known_exploited": true,
+      "date_added": "2026-04-20",
+      "short_description": "Path traversal in IIoT gateway web interface allowing credential exfiltration"
+    },
+    {
+      "cve_id": "CVE-2025-4321",
+      "vendor": "Multiple",
+      "product": "Node.js",
+      "known_exploited": true,
+      "date_added": "2026-05-01",
+      "short_description": "HTTP request smuggling in Node.js < 22"
+    }
+  ],
+  "last_updated": "2026-06-01",
+  "source": "CISA KEV catalogue (educational stub)"
+}

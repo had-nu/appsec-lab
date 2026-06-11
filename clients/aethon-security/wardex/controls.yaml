@@ -1,0 +1,23 @@
+# Aethon Security — implemented controls for Wardex evaluation
+controls:
+  - id: "A.8.28"
+    name: "Secure Coding"
+    framework: "iso27001"
+    maturity: 4
+    implemented: true
+    effectiveness: 0.8
+    justification: "SAST gate blocking + SCA weekly + peer review"
+  - id: "A.8.30"
+    name: "Outsourced Development"
+    framework: "iso27001"
+    maturity: 3
+    implemented: true
+    effectiveness: 0.7
+    justification: "SBOM CycloneDX with cosign signing"
+  - id: "A.8.16"
+    name: "Monitoring and Logging"
+    framework: "iso27001"
+    maturity: 4
+    implemented: true
+    effectiveness: 0.85
+    justification: "SIEM product — built-in monitoring and logging"

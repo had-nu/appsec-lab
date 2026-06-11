@@ -1,0 +1,15 @@
+# Wardex Configuration — Nexus Dynamics
+# CRA Art. 14 compliance gate
+
+thresholds:
+  critical_vulnerabilities: 0
+  high_vulnerabilities: 2
+
+output:
+  format: "json"
+  file: "wardex-report.json"
+  roadmap_limit: 10
+
+security:
+  enforce_actor_trust: false
+  fail_close_default: 1.0
