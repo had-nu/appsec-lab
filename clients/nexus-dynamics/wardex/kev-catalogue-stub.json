@@ -1,14 +1,19 @@
 {
-  "catalog": [
+  "title": "CISA KEV Catalog (educational stub)",
+  "catalogVersion": "1.0",
+  "dateReleased": "2026-06-01T00:00:00Z",
+  "vulnerabilities": [
     {
-      "cve_id": "CVE-2024-1234",
-      "vendor": "Nexus Dynamics",
+      "cveID": "CWE-89",
+      "vendorProject": "Nexus Dynamics",
       "product": "NexusFlow",
-      "known_exploited": true,
-      "date_added": "2026-03-15",
-      "short_description": "SQL injection in search endpoint allowing unauthenticated RCE"
+      "vulnerabilityName": "SQL Injection in search endpoint",
+      "dateAdded": "2026-03-15T00:00:00Z",
+      "shortDescription": "SQL injection in search endpoint allowing unauthenticated RCE",
+      "requiredAction": "Apply patch per vendor instructions or discontinue use",
+      "dueDate": "2026-04-05T00:00:00Z",
+      "knownRansomwareCampaignUse": "Unknown",
+      "notes": "Educational stub for appsec-lab — Nexus Dynamics"
     }
-  ],
-  "last_updated": "2026-06-01",
-  "source": "CISA KEV catalogue (educational stub)"
+  ]
 }

@@ -1,15 +1,45 @@
-# Wardex Configuration — Aethon Security
-# CRA Class II — stricter thresholds for SIEM/endpoint product
+# Wardex Configuration — Aethon Security (v2.1.2)
+# Class II (Annex III), SIEM/endpoint, Notified Body
 
-thresholds:
-  critical_vulnerabilities: 0
-  high_vulnerabilities: 0
+release_gate:
+  enabled: true
+  risk_appetite: 0.12
+  warn_above: 0.08
+  mode: "any"
+  asset_context:
+    criticality: 1.10
+    internet_facing: true
+    requires_auth: true
+    environment: "production"
+  compensating_controls:
+    - type: "siem_monitoring"
+      effectiveness: 0.30
+      justification: "SIEM product — built-in monitoring and logging"
+    - type: "endpoint_protection"
+      effectiveness: 0.20
+      justification: "Endpoint agent with real-time detection"
 
-output:
+acceptance:
+  limits:
+    max_acceptance_days: 30
+    min_justification_chars: 50
+    max_report_age_hours: 8
+  banned_justification_phrases:
+    - "legacy code"
+    - "no time to fix"
+    - "low priority"
+
+reporting:
   format: "json"
-  file: "wardex-report.json"
-  roadmap_limit: 20
+  output: "reports/wardex-report.json"
+  gate_log:
+    path: "reports/wardex-gate-audit.log"
 
-security:
-  enforce_actor_trust: true
-  fail_close_default: 1.0
+cra:
+  art14:
+    output_dir: "reports"
+    awareness_source: "detection"
+    product_name: "AethonShield"
+    product_version: "3.1"
+    kev_path: "kev-catalogue-stub.json"
+    kev_max_age_days: 7

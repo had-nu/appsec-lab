@@ -1,23 +1,43 @@
-# Aethon Security — implemented controls for Wardex evaluation
+# Aethon Security — implemented controls for Wardex evaluation (v2.1.2)
 controls:
   - id: "A.8.28"
     name: "Secure Coding"
+    layer: "implemented"
     framework: "iso27001"
     maturity: 4
-    implemented: true
+    domains: ["technological"]
     effectiveness: 0.8
+    evidences:
+      - type: "tool"
+        ref: "sast-gate-blocking-ci"
+      - type: "tool"
+        ref: "sca-weekly-scanning"
+      - type: "review"
+        ref: "peer-review-process-v3"
     justification: "SAST gate blocking + SCA weekly + peer review"
+
   - id: "A.8.30"
     name: "Outsourced Development"
+    layer: "implemented"
     framework: "iso27001"
     maturity: 3
-    implemented: true
+    domains: ["organizational"]
     effectiveness: 0.7
+    evidences:
+      - type: "tool"
+        ref: "sbom-cyclonedx-signing-pipeline"
+      - type: "process"
+        ref: "supply-chain-attestation"
     justification: "SBOM CycloneDX with cosign signing"
+
   - id: "A.8.16"
     name: "Monitoring and Logging"
+    layer: "implemented"
     framework: "iso27001"
     maturity: 4
-    implemented: true
+    domains: ["technological"]
     effectiveness: 0.85
+    evidences:
+      - type: "architecture"
+        ref: "aethonshield-siem-architecture"
     justification: "SIEM product — built-in monitoring and logging"

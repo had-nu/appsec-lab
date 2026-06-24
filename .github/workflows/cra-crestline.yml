@@ -60,6 +60,8 @@ print(f'  Components: {len(sbom.get(\"components\", []))}')
   wardex-gate:
     needs: [sast, sca, sbom-check]
     runs-on: ubuntu-latest
+    env:
+      WARDEX_ACCEPT_SECRET: ${{ secrets.WARDEX_ACCEPT_SECRET || 'wardex-lab-dev-secret-not-for-prod' }}
     steps:
       - uses: actions/checkout@v4
       - run: ./run.sh wardex
