@@ -17,7 +17,6 @@ exactamente o que se espera de um Especialista AppSec Sénior num contexto regul
 - **Docker Engine** (≥ 24.0)
 - **Docker Compose v2**
 - **~4 GB de espaço em disco**
-- **~2 GB de RAM** para ZAP + Juice Shop
 
 ### Setup
 
@@ -31,28 +30,22 @@ chmod +x run.sh
 
 ## Comandos de Execução
 
-### Scanners (lab base)
+### Scanners per-cliente
 
 ```bash
-./run.sh sast             # Semgrep + Bearer contra ./src
-./run.sh sca              # Trivy filesystem scan de ./src
-./run.sh dast             # Inicia Juice Shop + ZAP baseline
-./run.sh iac              # Trivy config + Checkov
-./run.sh all              # Tudo (requer Juice Shop healthy)
-./run.sh target           # Só inicia Juice Shop
-./run.sh report           # Sumário de findings
-./run.sh down             # Desmonta containers
-```
-
-### CRA Compliance (extensão)
-
-```bash
-CLIENT=nexus-dynamics ./run.sh wardex             # Wardex release gate
-CLIENT=nexus-dynamics ./run.sh cra-check           # Verifica artefactos CRA
-CLIENT=nexus-dynamics ./run.sh compliance-report   # Sumário de conformidade
+CLIENT=nexus-dynamics ./run.sh sast      # Semgrep + Bearer contra src/<CLIENT>/
+CLIENT=nexus-dynamics ./run.sh sca       # Trivy filesystem scan de src/<CLIENT>/
+CLIENT=nexus-dynamics ./run.sh iac       # Trivy config + Checkov
+CLIENT=nexus-dynamics ./run.sh all       # Pipeline completo (sast + sca + iac + wardex)
+CLIENT=nexus-dynamics ./run.sh wardex    # Wardex release gate CRA
+CLIENT=nexus-dynamics ./run.sh cra-check # Verifica artefactos CRA
+CLIENT=nexus-dynamics ./run.sh compliance-report  # Sumário de conformidade
+./run.sh report          # Sumário de findings
+./run.sh down            # Desmonta containers
 ```
 
 Clientes disponíveis: `nexus-dynamics`, `crestline-systems`, `aethon-security`.
+Para each cliente, o código-fonte simulado está em `src/<cliente>/`.
 
 ---
 
@@ -69,7 +62,9 @@ appsec-lab/
 │   ├── cra-crestline.yml     ← Pipeline Cliente 2
 │   └── cra-aethon.yml        ← Pipeline Cliente 3
 ├── src/
-│   └── sample-vulnerable.js  ← Código com 6 CWEs
+│   ├── nexus-dynamics/       ← NexusFlow v2.3 (SaaS, 14 CWEs)
+│   ├── crestline-systems/    ← EdgeSentry v1.4 (IIoT, 15 CWEs)
+│   └── aethon-security/      ← AethonShield v3.1 (SIEM, 17 CWEs)
 ├── clients/
 │   ├── nexus-dynamics/       ← Cliente 1 (12 dias)
 │   ├── crestline-systems/    ← Cliente 2 (18 dias)
@@ -98,10 +93,9 @@ appsec-lab/
 | **Trivy (fs)** | SCA | CVEs em dependências, segredos |
 | **Trivy (config)** | IaC | Misconfigs em Docker/Compose |
 | **Checkov** | IaC | Misconfigs de infra |
-| **ZAP** | DAST | Vulns em runtime (XSS, headers) |
 | **Wardex** | Gate | Risk-based release gate CRA |
 
-**Target:** OWASP Juice Shop
+**Targets:** Código por cliente em `src/<cliente>/` (contextualizado ao produto)
 
 ---
 
@@ -129,21 +123,21 @@ incluindo decisões arquitecturais, OD-01 a OD-04, e sequência de produção.
 
 ### Dia 1 — Setup + SAST
 ```bash
-./run.sh sast
+CLIENT=nexus-dynamics ./run.sh sast
 ```
 Para cada finding: CWE? O que está errado? Impacto em produção? Como corrigir?
 
 ### Dia 2 — SCA + Mapeamento de Risco
 ```bash
-./run.sh sca
+CLIENT=nexus-dynamics ./run.sh sca
 ```
 Para cada CVE HIGH/CRITICAL: CVSS base vs. contextual? Attack vector? Precisa de auth? O vendor tem patch?
 
-### Dia 3 — DAST + IaC
+### Dia 3 — IaC + Correlação
 ```bash
-./run.sh dast && ./run.sh iac
+CLIENT=nexus-dynamics ./run.sh iac
 ```
-Que findings aparecem no DAST que não aparecem no SAST? (resposta: misconfigs HTTP headers, CORS, cookies)
+Que misconfigs de infra podem amplificar o risco das vulns encontradas? (ex: secrets no docker-compose, permissões no workflow)
 
 ### Dia 4 — Integração + Linguagem de Risco
 Para cada finding, escrever uma frase para o Diretor de SI:

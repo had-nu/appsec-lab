@@ -1,55 +1,110 @@
 # Vulnerabilities found in NexusFlow v2.3 — SAST + SCA scan results
+# SaaS manufacturing platform (Node.js/Express)
 # Canonical VulnerabilityEnvelope (v2.1.2)
 
 converted_by: "manual/appsec-lab"
 vulnerabilities:
+  # ── Criticas ──
   - cve_id: "CWE-89"
     cvss_base: 9.8
     epss_score: 0.92
-    component: "src/sample-vulnerable.js (SQL injection)"
+    component: "nexus-flow/src/api/search.js (SQL injection — API de ordens)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-03-15T00:00:00Z"
     exploited_source: "cisa-kev"
 
-  - cve_id: "CWE-79"
-    cvss_base: 6.1
-    epss_score: 0.78
-    component: "src/sample-vulnerable.js (XSS)"
+  - cve_id: "CWE-918"
+    cvss_base: 8.6
+    epss_score: 0.45
+    component: "nexus-flow/src/integrations/webhook.js (SSRF — integração fornecedores)"
     reachable: true
     actively_exploited: false
 
+  - cve_id: "CWE-285"
+    cvss_base: 8.1
+    epss_score: 0.52
+    component: "nexus-flow/src/api/orders.js (IDOR — acesso ordens de produção)"
+    reachable: true
+    actively_exploited: false
+
+  # ── Altas ──
   - cve_id: "CWE-798"
     cvss_base: 7.5
     epss_score: 0.45
-    component: "src/sample-vulnerable.js (hardcoded credentials)"
+    component: "nexus-flow/config/database.js (hardcoded credentials)"
+    reachable: true
+    actively_exploited: true
+    actively_exploited_since: "2026-04-10T00:00:00Z"
+    exploited_source: "cisa-kev"
+
+  - cve_id: "CWE-287"
+    cvss_base: 7.3
+    epss_score: 0.52
+    component: "nexus-flow/src/auth/login.js (weak JWT — token previsível)"
+    reachable: true
+    actively_exploited: false
+
+  - cve_id: "CWE-79"
+    cvss_base: 6.1
+    epss_score: 0.78
+    component: "nexus-flow/src/ui/comments.js (stored XSS — comentários em ordens)"
     reachable: true
     actively_exploited: false
 
   - cve_id: "CWE-22"
     cvss_base: 7.5
     epss_score: 0.34
-    component: "src/sample-vulnerable.js (path traversal)"
+    component: "nexus-flow/src/api/reports.js (path traversal — download relatórios)"
+    reachable: true
+    actively_exploited: false
+
+  - cve_id: "CWE-352"
+    cvss_base: 6.5
+    epss_score: 0.40
+    component: "nexus-flow/src/api/state.js (CSRF — sem tokens em alterações de estado)"
+    reachable: true
+    actively_exploited: false
+
+  # ── Médias ──
+  - cve_id: "CWE-200"
+    cvss_base: 5.3
+    epss_score: 0.18
+    component: "nexus-flow/src/middleware/error.js (stack trace em erro 500)"
+    reachable: true
+    actively_exploited: false
+
+  - cve_id: "CWE-523"
+    cvss_base: 7.4
+    epss_score: 0.25
+    component: "nexus-flow/src/internal/api.js (comunicação interna sem TLS)"
+    reachable: true
+    actively_exploited: false
+
+  - cve_id: "CWE-620"
+    cvss_base: 6.1
+    epss_score: 0.22
+    component: "nexus-flow/src/auth/reset.js (password change sem verificação)"
     reachable: true
     actively_exploited: false
 
   - cve_id: "CWE-916"
     cvss_base: 5.9
     epss_score: 0.21
-    component: "src/sample-vulnerable.js (weak hashing)"
+    component: "nexus-flow/src/auth/hash.js (MD5 — weak password hashing)"
     reachable: true
     actively_exploited: false
 
   - cve_id: "CWE-614"
     cvss_base: 5.3
     epss_score: 0.15
-    component: "src/sample-vulnerable.js (insecure cookie)"
+    component: "nexus-flow/src/middleware/session.js (cookie sem Secure flag)"
     reachable: true
     actively_exploited: false
 
-  - cve_id: "CWE-287"
-    cvss_base: 7.3
-    epss_score: 0.52
-    component: "src/sample-vulnerable.js (weak auth)"
-    reachable: true
+  - cve_id: "CWE-1104"
+    cvss_base: 5.5
+    epss_score: 0.12
+    component: "nexus-flow/package.json (dependency não mantida — 3 anos sem update)"
+    reachable: false
     actively_exploited: false

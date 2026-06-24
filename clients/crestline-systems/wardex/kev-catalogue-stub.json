@@ -1,31 +1,43 @@
 {
-  "title": "CISA KEV Catalog (educational stub)",
+  "title": "CISA KEV Catalog (educational stub — Crestline Systems)",
   "catalogVersion": "1.0",
   "dateReleased": "2026-06-01T00:00:00Z",
   "vulnerabilities": [
     {
+      "cveID": "CWE-306",
+      "vendorProject": "Crestline Systems",
+      "product": "EdgeSentry",
+      "vulnerabilityName": "Missing Authentication on OT Management API",
+      "dateAdded": "2026-03-15T00:00:00Z",
+      "shortDescription": "EdgeSentry OT management API accepts all requests without authentication — attacker can reconfigure industrial gateways",
+      "requiredAction": "Implement authentication on all OT API endpoints immediately",
+      "dueDate": "2026-04-05T00:00:00Z",
+      "knownRansomwareCampaignUse": "Known",
+      "notes": "Educational stub — Crestline Systems. OT environment with known ransomware campaigns targeting IIoT."
+    },
+    {
+      "cveID": "CWE-77",
+      "vendorProject": "Crestline Systems",
+      "product": "EdgeSentry",
+      "vulnerabilityName": "OS Command Injection in Admin CLI",
+      "dateAdded": "2026-04-10T00:00:00Z",
+      "shortDescription": "EdgeSentry administrative CLI allows OS command injection via unsanitised input",
+      "requiredAction": "Apply patch and restrict CLI access to authorised administrators",
+      "dueDate": "2026-05-01T00:00:00Z",
+      "knownRansomwareCampaignUse": "Known",
+      "notes": "Educational stub — Crestline Systems. Command injection in OT context enables full network compromise."
+    },
+    {
       "cveID": "CWE-89",
       "vendorProject": "Crestline Systems",
       "product": "EdgeSentry",
-      "vulnerabilityName": "SQL Injection in IIoT gateway API",
+      "vulnerabilityName": "SQL Injection in OT Data Query Interface",
       "dateAdded": "2026-03-15T00:00:00Z",
-      "shortDescription": "SQL injection in EdgeSentry gateway API allowing unauthenticated RCE on OT network",
-      "requiredAction": "Apply patch, segment OT network, or discontinue use in critical infrastructure",
+      "shortDescription": "SQL injection in EdgeSentry OT data query interface allowing access to industrial process data",
+      "requiredAction": "Apply patch or discontinue use in critical infrastructure",
       "dueDate": "2026-04-05T00:00:00Z",
       "knownRansomwareCampaignUse": "Known",
-      "notes": "Educational stub for appsec-lab — Crestline Systems. CWE-89 in IIoT context is ransomware vector."
-    },
-    {
-      "cveID": "CWE-798",
-      "vendorProject": "Crestline Systems",
-      "product": "EdgeSentry",
-      "vulnerabilityName": "Hardcoded Administrative Credentials",
-      "dateAdded": "2026-04-10T00:00:00Z",
-      "shortDescription": "Hardcoded credentials in EdgeSentry gateway management interface",
-      "requiredAction": "Rotate credentials and implement credential management",
-      "dueDate": "2026-05-01T00:00:00Z",
-      "knownRansomwareCampaignUse": "Unknown",
-      "notes": "Educational stub — Crestline Systems"
+      "notes": "Educational stub — Crestline Systems. CWE-89 in IIoT context enables OT data theft."
     }
   ]
 }

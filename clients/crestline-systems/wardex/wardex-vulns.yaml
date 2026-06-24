@@ -1,56 +1,119 @@
 # Vulnerabilities found in EdgeSentry v1.4 — SAST + SCA scan results
-# IIoT gateway management software — critical infrastructure context
+# IIoT gateway management software (C/C++, Node.js CLI)
 # Canonical VulnerabilityEnvelope (v2.1.2)
 
 converted_by: "manual/appsec-lab"
 vulnerabilities:
-  - cve_id: "CWE-89"
-    cvss_base: 9.8
-    epss_score: 0.92
-    component: "src/sample-vulnerable.js (SQL injection)"
+  # ── Críticas ──
+  - cve_id: "CWE-306"
+    cvss_base: 9.4
+    epss_score: 0.72
+    component: "edge-sentry/ot/api/auth.js (missing auth — API OT)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-03-15T00:00:00Z"
     exploited_source: "cisa-kev"
 
-  - cve_id: "CWE-79"
-    cvss_base: 6.1
-    epss_score: 0.78
-    component: "src/sample-vulnerable.js (XSS)"
+  - cve_id: "CWE-77"
+    cvss_base: 9.1
+    epss_score: 0.65
+    component: "edge-sentry/cli/admin.c (OS command injection — CLI gestão)"
+    reachable: true
+    actively_exploited: true
+    actively_exploited_since: "2026-04-10T00:00:00Z"
+    exploited_source: "cisa-kev"
+
+  - cve_id: "CWE-787"
+    cvss_base: 9.1
+    epss_score: 0.42
+    component: "edge-sentry/protocols/modbus.c (out-of-bounds write — parser Modbus)"
     reachable: true
     actively_exploited: false
 
+  - cve_id: "CWE-89"
+    cvss_base: 9.8
+    epss_score: 0.92
+    component: "edge-sentry/api/query.js (SQL injection — interface dados OT)"
+    reachable: true
+    actively_exploited: true
+    actively_exploited_since: "2026-03-15T00:00:00Z"
+    exploited_source: "cisa-kev"
+
   - cve_id: "CWE-798"
+    cvss_base: 9.3
+    epss_score: 0.62
+    component: "edge-sentry/firmware/config.c (hardcoded admin creds na firmware)"
+    reachable: true
+    actively_exploited: false
+
+  # ── Altas ──
+  - cve_id: "CWE-347"
+    cvss_base: 8.1
+    epss_score: 0.32
+    component: "edge-sentry/updater/verify.c (unsigned firmware update)"
+    reachable: true
+    actively_exploited: false
+
+  - cve_id: "CWE-494"
+    cvss_base: 8.8
+    epss_score: 0.35
+    component: "edge-sentry/updater/download.c (download sem integrity check)"
+    reachable: true
+    actively_exploited: false
+
+  - cve_id: "CWE-294"
+    cvss_base: 8.3
+    epss_score: 0.42
+    component: "edge-sentry/protocols/modbus.c (replay attack — sem nonce)"
+    reachable: true
+    actively_exploited: false
+
+  - cve_id: "CWE-120"
+    cvss_base: 8.5
+    epss_score: 0.38
+    component: "edge-sentry/network/packet.c (buffer overflow — parsing pacotes)"
+    reachable: true
+    actively_exploited: false
+
+  - cve_id: "CWE-862"
     cvss_base: 7.5
-    epss_score: 0.45
-    component: "src/sample-vulnerable.js (hardcoded credentials)"
+    epss_score: 0.35
+    component: "edge-sentry/api/admin.js (missing authorization — endpoints OT)"
+    reachable: true
+    actively_exploited: false
+
+  - cve_id: "CWE-319"
+    cvss_base: 7.4
+    epss_score: 0.40
+    component: "edge-sentry/protocols/modbus.c (cleartext — Modbus sem TLS)"
     reachable: true
     actively_exploited: false
 
   - cve_id: "CWE-22"
+    cvss_base: 8.5
+    epss_score: 0.30
+    component: "edge-sentry/cli/log.c (path traversal — logs do sistema)"
+    reachable: true
+    actively_exploited: false
+
+  # ── Médias ──
+  - cve_id: "CWE-276"
+    cvss_base: 7.8
+    epss_score: 0.25
+    component: "edge-sentry/config/settings.c (world-writable config)"
+    reachable: true
+    actively_exploited: false
+
+  - cve_id: "CWE-311"
     cvss_base: 7.5
-    epss_score: 0.34
-    component: "src/sample-vulnerable.js (path traversal)"
+    epss_score: 0.20
+    component: "edge-sentry/storage/data.c (OT data stored in plaintext)"
     reachable: true
     actively_exploited: false
 
-  - cve_id: "CWE-916"
-    cvss_base: 5.9
-    epss_score: 0.21
-    component: "src/sample-vulnerable.js (weak hashing)"
-    reachable: true
-    actively_exploited: false
-
-  - cve_id: "CWE-614"
-    cvss_base: 5.3
-    epss_score: 0.15
-    component: "src/sample-vulnerable.js (insecure cookie)"
-    reachable: true
-    actively_exploited: false
-
-  - cve_id: "CWE-287"
-    cvss_base: 7.3
-    epss_score: 0.52
-    component: "src/sample-vulnerable.js (weak auth)"
+  - cve_id: "CWE-200"
+    cvss_base: 6.5
+    epss_score: 0.25
+    component: "edge-sentry/api/info.js (topology disclosure — mapa OT exposto)"
     reachable: true
     actively_exploited: false

@@ -16,12 +16,10 @@ USAGE
   ./run.sh <target>
 
 TARGETS
-  all       Run everything (requires juice-shop to be up)
-  sast      Semgrep + Bearer against ./src
-  sca       Trivy filesystem scan of ./src
-  dast      ZAP baseline against juice-shop (starts it first)
+  all       Run full pipeline: SAST + SCA + IaC + Wardex (CLIENT obrigatório)
+  sast      Semgrep + Bearer against src/<CLIENT>/
+  sca       Trivy filesystem scan of src/<CLIENT>/
   iac       Trivy config + Checkov against lab configs
-  target    Start Juice Shop only (for manual testing)
   wardex    Run Wardex gate (requires CLIENT env var)
   cra-check  Verify presence of mandatory CRA artifacts for CLIENT
   compliance-report  Generate consolidated compliance summary
@@ -29,38 +27,37 @@ TARGETS
   down      Stop and remove all containers and networks
 
 EXAMPLES
-  ./run.sh sast           # Run SAST only, fast
-  ./run.sh dast           # Start Juice Shop + run ZAP
-  ./run.sh all            # Full pipeline
+  CLIENT=nexus-dynamics ./run.sh sast    # SAST for Nexus Dynamics
+  CLIENT=nexus-dynamics ./run.sh all     # Full pipeline (SAST + SCA + IaC + Wardex)
   ./run.sh report         # Summarise what's in reports/
 EOF
 }
 
-start_target() {
-  echo "[*] Starting Juice Shop..."
-  docker compose up -d juice-shop
-  echo "[*] Waiting 15s for Juice Shop to boot..."
-  sleep 15
-  echo "[+] Juice Shop running at http://localhost:3000"
+require_src_client() {
+  if [ -z "${CLIENT:-}" ]; then
+    echo "[!] CLIENT env var required. Usage: CLIENT=nexus-dynamics ./run.sh $1"
+    echo "    Available: nexus-dynamics, crestline-systems, aethon-security"
+    exit 1
+  fi
+  local dir="./src/$CLIENT"
+  if [ ! -d "$dir" ]; then
+    echo "[!] Client source directory not found: $dir"
+    exit 1
+  fi
 }
 
 run_sast() {
-  echo "[*] Running SAST (Semgrep + Bearer)..."
-  docker compose --profile sast up --abort-on-container-exit || true
+  require_src_client sast
+  echo "[*] Running SAST (Semgrep + Bearer) for client: $CLIENT"
+  CLIENT="$CLIENT" docker compose --profile sast up --abort-on-container-exit || true
   echo "[+] SAST reports written to $REPORTS_DIR/"
 }
 
 run_sca() {
-  echo "[*] Running SCA (Trivy filesystem)..."
-  docker compose --profile sca up --abort-on-container-exit || true
+  require_src_client sca
+  echo "[*] Running SCA (Trivy filesystem) for client: $CLIENT"
+  CLIENT="$CLIENT" docker compose --profile sca up --abort-on-container-exit || true
   echo "[+] SCA report written to $REPORTS_DIR/trivy-fs.json"
-}
-
-run_dast() {
-  start_target
-  echo "[*] Running DAST (ZAP baseline)..."
-  docker compose --profile dast up --abort-on-container-exit || true
-  echo "[+] DAST reports written to $REPORTS_DIR/zap-baseline.*"
 }
 
 run_iac() {
@@ -98,15 +95,6 @@ total=sum(len(r.get('Vulnerabilities') or []) for r in d.get('Results',[]))
 print(total)
 " 2>/dev/null || echo "?")
     echo "  Trivy vulns      : $COUNT"
-  fi
-
-  if [ -f "$REPORTS_DIR/zap-baseline.json" ]; then
-    COUNT=$(python3 -c "
-import json,sys
-d=json.load(open('$REPORTS_DIR/zap-baseline.json'))
-print(len(d.get('site',[{}])[0].get('alerts',[])))
-" 2>/dev/null || echo "?")
-    echo "  ZAP alerts        : $COUNT"
   fi
 
   if [ -f "$REPORTS_DIR/results_json.json" ]; then
@@ -226,15 +214,13 @@ case "${1:-help}" in
   all)
     run_sast
     run_sca
-    run_dast
     run_iac
     print_report
+    run_wardex
     ;;
   sast)    run_sast ;;
   sca)     run_sca ;;
-  dast)    run_dast ;;
   iac)     run_iac ;;
-  target)  start_target ;;
   wardex)  run_wardex ;;
   cra-check) run_cra_check ;;
   compliance-report) run_compliance_report ;;

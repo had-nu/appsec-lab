@@ -1,5 +1,5 @@
 {
-  "title": "CISA KEV Catalog (educational stub)",
+  "title": "CISA KEV Catalog (educational stub — Nexus Dynamics)",
   "catalogVersion": "1.0",
   "dateReleased": "2026-06-01T00:00:00Z",
   "vulnerabilities": [
@@ -7,13 +7,25 @@
       "cveID": "CWE-89",
       "vendorProject": "Nexus Dynamics",
       "product": "NexusFlow",
-      "vulnerabilityName": "SQL Injection in search endpoint",
+      "vulnerabilityName": "SQL Injection in Production Search API",
       "dateAdded": "2026-03-15T00:00:00Z",
-      "shortDescription": "SQL injection in search endpoint allowing unauthenticated RCE",
+      "shortDescription": "SQL injection in NexusFlow search endpoint allowing unauthenticated RCE on manufacturing database",
       "requiredAction": "Apply patch per vendor instructions or discontinue use",
       "dueDate": "2026-04-05T00:00:00Z",
       "knownRansomwareCampaignUse": "Unknown",
-      "notes": "Educational stub for appsec-lab — Nexus Dynamics"
+      "notes": "Educational stub — Nexus Dynamics. Active exploitation observed in manufacturing sector."
+    },
+    {
+      "cveID": "CWE-798",
+      "vendorProject": "Nexus Dynamics",
+      "product": "NexusFlow",
+      "vulnerabilityName": "Hardcoded Database Credentials in Configuration",
+      "dateAdded": "2026-04-10T00:00:00Z",
+      "shortDescription": "Hardcoded database credentials in NexusFlow production configuration",
+      "requiredAction": "Rotate credentials immediately and implement credential vault",
+      "dueDate": "2026-05-01T00:00:00Z",
+      "knownRansomwareCampaignUse": "Unknown",
+      "notes": "Educational stub — Nexus Dynamics. Credentials discovered in world-readable config file."
     }
   ]
 }

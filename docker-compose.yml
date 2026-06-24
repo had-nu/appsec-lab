@@ -1,25 +1,14 @@
 services:
 
   # ──────────────────────────────────────────────
-  # TARGET: OWASP Juice Shop (deliberately vulnerable app)
-  # Accessible at http://localhost:3000
-  # ──────────────────────────────────────────────
-  juice-shop:
-    image: bkimminich/juice-shop:latest
-    ports:
-      - "3000:3000"
-    networks:
-      - lab-net
-
-  # ──────────────────────────────────────────────
   # SAST: Semgrep — pattern-based static analysis
-  # Scans source code in ./src for security issues
+  # Scans source code for the active client
   # Output: reports/semgrep.json
   # ──────────────────────────────────────────────
   semgrep:
     image: returntocorp/semgrep:latest
     volumes:
-      - ./src:/src:ro
+      - ./src/${CLIENT:-nexus-dynamics}:/src:ro
       - ./reports:/reports
     command: >
       semgrep scan
@@ -39,7 +28,7 @@ services:
   bearer:
     image: bearer/bearer:latest
     volumes:
-      - ./src:/app/src:ro
+      - ./src/${CLIENT:-nexus-dynamics}:/app/src:ro
       - ./config:/app/config:ro
       - ./reports:/app/reports
     command: >
@@ -51,13 +40,13 @@ services:
 
   # ──────────────────────────────────────────────
   # SCA: Trivy — dependency + container vulnerability scanner
-  # Runs three modes: fs (dependencies), image (container), config (IaC)
-  # Output: reports/trivy-*.json
+  # Filesystem scan of the active client's source
+  # Output: reports/trivy-fs.json
   # ──────────────────────────────────────────────
   trivy-fs:
     image: aquasec/trivy:latest
     volumes:
-      - ./src:/src:ro
+      - ./src/${CLIENT:-nexus-dynamics}:/src:ro
       - ./reports:/reports
       - trivy-cache:/root/.cache/trivy
     command: >
@@ -68,6 +57,11 @@ services:
         --scanners vuln,secret
     profiles: ["sca"]
 
+  # ──────────────────────────────────────────────
+  # IaC: Trivy config — misconfiguration scanning
+  # Scans Dockerfiles, Compose files, GitHub Actions
+  # Output: reports/trivy-iac.json
+  # ──────────────────────────────────────────────
   trivy-iac:
     image: aquasec/trivy:latest
     volumes:
@@ -80,28 +74,6 @@ services:
         --output /reports/trivy-iac.json
         --severity HIGH,CRITICAL
     profiles: ["iac"]
-
-  # ──────────────────────────────────────────────
-  # DAST: OWASP ZAP — dynamic application security testing
-  # Runs a baseline scan against the live Juice Shop
-  # Output: reports/zap-baseline.json + zap-baseline.html
-  # ──────────────────────────────────────────────
-  zap:
-    image: ghcr.io/zaproxy/zaproxy:stable
-    volumes:
-      - ./reports:/zap/wrk
-    depends_on:
-      - juice-shop
-    command: >
-      zap-baseline.py
-        -t http://juice-shop:3000
-        -J zap-baseline.json
-        -r zap-baseline.html
-        -l WARN
-        -I
-    networks:
-      - lab-net
-    profiles: ["dast"]
 
   # ──────────────────────────────────────────────
   # IaC: Checkov — IaC misconfiguration scanner

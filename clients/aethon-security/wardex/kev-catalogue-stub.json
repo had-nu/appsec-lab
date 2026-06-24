@@ -1,43 +1,67 @@
 {
-  "title": "CISA KEV Catalog (educational stub)",
+  "title": "CISA KEV Catalog (educational stub — Aethon Security)",
   "catalogVersion": "1.0",
   "dateReleased": "2026-06-01T00:00:00Z",
   "vulnerabilities": [
     {
+      "cveID": "CWE-502",
+      "vendorProject": "Aethon Security",
+      "product": "AethonShield",
+      "vulnerabilityName": "Insecure Deserialization in Agent RPC Channel",
+      "dateAdded": "2026-03-15T00:00:00Z",
+      "shortDescription": "Insecure deserialization in AethonShield agent communication channel allows RCE on SIEM server",
+      "requiredAction": "Apply patch or discontinue use of AethonShield agent",
+      "dueDate": "2026-04-05T00:00:00Z",
+      "knownRansomwareCampaignUse": "Known",
+      "notes": "Educational stub — Aethon Security. Security product vulnerability enables total SIEM compromise."
+    },
+    {
+      "cveID": "CWE-306",
+      "vendorProject": "Aethon Security",
+      "product": "AethonShield",
+      "vulnerabilityName": "Missing Authentication on Log Ingestion API",
+      "dateAdded": "2026-04-01T00:00:00Z",
+      "shortDescription": "AethonShield log ingestion API accepts logs without any authentication — log injection and data poisoning possible",
+      "requiredAction": "Implement authentication on ingestion API before use",
+      "dueDate": "2026-04-22T00:00:00Z",
+      "knownRansomwareCampaignUse": "Unknown",
+      "notes": "Educational stub — Aethon Security. Log ingestion without auth enables massive data poisoning."
+    },
+    {
+      "cveID": "CWE-269",
+      "vendorProject": "Aethon Security",
+      "product": "AethonShield",
+      "vulnerabilityName": "Privilege Escalation via Endpoint Agent Installer",
+      "dateAdded": "2026-05-01T00:00:00Z",
+      "shortDescription": "AethonShield endpoint agent installer runs with elevated privileges allowing privilege escalation on host",
+      "requiredAction": "Issue patched installer immediately and revoke existing agent tokens",
+      "dueDate": "2026-05-22T00:00:00Z",
+      "knownRansomwareCampaignUse": "Known",
+      "notes": "Educational stub — Aethon Security. Agent privilege escalation enables full endpoint compromise."
+    },
+    {
       "cveID": "CWE-89",
       "vendorProject": "Aethon Security",
       "product": "AethonShield",
-      "vulnerabilityName": "SQL Injection in SIEM search API",
+      "vulnerabilityName": "SQL Injection in SIEM Search Engine",
       "dateAdded": "2026-03-15T00:00:00Z",
-      "shortDescription": "SQL injection in AethonShield search API allowing unauthenticated access to security event data",
-      "requiredAction": "Apply patch or discontinue use of SIEM platform",
+      "shortDescription": "SQL injection in AethonShield search engine allowing access to all customer security event data",
+      "requiredAction": "Apply patch immediately and rotate all stored credentials",
       "dueDate": "2026-04-05T00:00:00Z",
       "knownRansomwareCampaignUse": "Known",
-      "notes": "Educational stub for appsec-lab — Aethon Security. Class II product with active CRA Art. 14 notification."
+      "notes": "Educational stub — Aethon Security. Class II product — multi-tenant data breach possible."
     },
     {
       "cveID": "CWE-798",
       "vendorProject": "Aethon Security",
       "product": "AethonShield",
-      "vulnerabilityName": "Hardcoded Credentials in Endpoint Agent",
-      "dateAdded": "2026-05-01T00:00:00Z",
-      "shortDescription": "Hardcoded credentials in AethonShield endpoint agent allowing lateral movement",
-      "requiredAction": "Rotate credentials and issue agent update",
-      "dueDate": "2026-05-22T00:00:00Z",
-      "knownRansomwareCampaignUse": "Unknown",
-      "notes": "Educational stub — Aethon Security"
-    },
-    {
-      "cveID": "CWE-287",
-      "vendorProject": "Aethon Security",
-      "product": "AethonShield",
-      "vulnerabilityName": "Weak Authentication — Predictable Tokens",
+      "vulnerabilityName": "Hardcoded Agent Credentials in Binary",
       "dateAdded": "2026-05-15T00:00:00Z",
-      "shortDescription": "Predictable authentication tokens in AethonShield API",
-      "requiredAction": "Implement cryptographic token generation and rotate existing tokens",
+      "shortDescription": "Hardcoded credentials in AethonShield endpoint agent binary allow lateral movement across customer networks",
+      "requiredAction": "Rotate agent credentials and issue patched binaries",
       "dueDate": "2026-06-05T00:00:00Z",
       "knownRansomwareCampaignUse": "Unknown",
-      "notes": "Educational stub — Aethon Security"
+      "notes": "Educational stub — Aethon Security. Agent credentials enable lateral movement in enterprise networks."
     }
   ]
 }
