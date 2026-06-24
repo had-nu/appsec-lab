@@ -1,22 +1,31 @@
 {
-  "catalog": [
+  "title": "CISA KEV Catalog (educational stub)",
+  "catalogVersion": "1.0",
+  "dateReleased": "2026-06-01T00:00:00Z",
+  "vulnerabilities": [
     {
-      "cve_id": "CVE-2024-5678",
-      "vendor": "Crestline Systems",
+      "cveID": "CWE-89",
+      "vendorProject": "Crestline Systems",
       "product": "EdgeSentry",
-      "known_exploited": true,
-      "date_added": "2026-04-20",
-      "short_description": "Path traversal in IIoT gateway web interface allowing credential exfiltration"
+      "vulnerabilityName": "SQL Injection in IIoT gateway API",
+      "dateAdded": "2026-03-15T00:00:00Z",
+      "shortDescription": "SQL injection in EdgeSentry gateway API allowing unauthenticated RCE on OT network",
+      "requiredAction": "Apply patch, segment OT network, or discontinue use in critical infrastructure",
+      "dueDate": "2026-04-05T00:00:00Z",
+      "knownRansomwareCampaignUse": "Known",
+      "notes": "Educational stub for appsec-lab — Crestline Systems. CWE-89 in IIoT context is ransomware vector."
     },
     {
-      "cve_id": "CVE-2025-4321",
-      "vendor": "Multiple",
-      "product": "Node.js",
-      "known_exploited": true,
-      "date_added": "2026-05-01",
-      "short_description": "HTTP request smuggling in Node.js < 22"
+      "cveID": "CWE-798",
+      "vendorProject": "Crestline Systems",
+      "product": "EdgeSentry",
+      "vulnerabilityName": "Hardcoded Administrative Credentials",
+      "dateAdded": "2026-04-10T00:00:00Z",
+      "shortDescription": "Hardcoded credentials in EdgeSentry gateway management interface",
+      "requiredAction": "Rotate credentials and implement credential management",
+      "dueDate": "2026-05-01T00:00:00Z",
+      "knownRansomwareCampaignUse": "Unknown",
+      "notes": "Educational stub — Crestline Systems"
     }
-  ],
-  "last_updated": "2026-06-01",
-  "source": "CISA KEV catalogue (educational stub)"
+  ]
 }

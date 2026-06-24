@@ -1,16 +1,27 @@
-# Crestline Systems — implemented controls for Wardex evaluation
+# Crestline Systems — implemented controls for Wardex evaluation (v2.1.2)
 controls:
   - id: "A.8.28"
     name: "Secure Coding"
+    layer: "implemented"
     framework: "iso27001"
     maturity: 3
-    implemented: true
+    domains: ["technological"]
     effectiveness: 0.5
-    justification: "SAST + SCA pipeline operational"
+    evidences:
+      - type: "tool"
+        ref: "semgrep-and-trivy-pipeline-config"
+      - type: "process"
+        ref: "sbom-generation-workflow"
+    justification: "SAST + SCA pipeline operational with SBOM generation"
+
   - id: "A.8.30"
     name: "Outsourced Development"
+    layer: "implemented"
     framework: "iso27001"
     maturity: 2
-    implemented: true
+    domains: ["organizational"]
     effectiveness: 0.4
-    justification: "SBOM generation implemented but not yet verified"
+    evidences:
+      - type: "procedure"
+        ref: "vendor-sbom-verification-process"
+    justification: "SBOM generation implemented but not yet verified against supply chain"

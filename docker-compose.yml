@@ -126,16 +126,21 @@ services:
   # Evaluates vulnerability reports against KEV/EPSS thresholds
   # Requires CLIENT env var (e.g. nexus-dynamics)
   # Output: clients/${CLIENT}/reports/wardex-report.json
+  #
+  # NOTE: This service is consumed via `docker compose run` (not `up`)
+  # in run.sh, which overrides the entrypoint command with the
+  # appropriate flags for each client.
   # ──────────────────────────────────────────────
   wardex:
     build:
       context: .
       dockerfile: Dockerfile.wardex
     volumes:
-      - ./clients/${CLIENT}/wardex:/workspace
+      - ./clients/${CLIENT}:/workspace/client:ro
       - ./clients/${CLIENT}/reports:/workspace/reports
     environment:
       - WARDEX_ACTOR=${USER:-practitioner}
+      - WARDEX_ACCEPT_SECRET=${WARDEX_ACCEPT_SECRET:-wardex-lab-dev-secret-not-for-prod}
     profiles: ["wardex"]
 
 networks:

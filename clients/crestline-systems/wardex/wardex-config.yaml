@@ -1,15 +1,41 @@
-# Wardex Configuration — Crestline Systems
-# CRA Art. 13 + Art. 14 compliance gate with SBOM check
+# Wardex Configuration — Crestline Systems (v2.1.2)
+# Class I (Annex III), IIoT gateway, SBOM mandatory
 
-thresholds:
-  critical_vulnerabilities: 0
-  high_vulnerabilities: 1
+release_gate:
+  enabled: true
+  risk_appetite: 0.20
+  warn_above: 0.12
+  mode: "any"
+  asset_context:
+    criticality: 0.85
+    internet_facing: false
+    requires_auth: true
+    environment: "industrial"
+  compensating_controls:
+    - type: "network_segmentation"
+      effectiveness: 0.25
+      justification: "IIoT gateway on isolated OT network segment"
 
-output:
+acceptance:
+  limits:
+    max_acceptance_days: 60
+    min_justification_chars: 30
+    max_report_age_hours: 12
+  banned_justification_phrases:
+    - "legacy code"
+    - "no time to fix"
+
+reporting:
   format: "json"
-  file: "wardex-report.json"
-  roadmap_limit: 15
+  output: "reports/wardex-report.json"
+  gate_log:
+    path: "reports/wardex-gate-audit.log"
 
-security:
-  enforce_actor_trust: true
-  fail_close_default: 1.0
+cra:
+  art14:
+    output_dir: "reports"
+    awareness_source: "detection"
+    product_name: "EdgeSentry"
+    product_version: "1.4"
+    kev_path: "kev-catalogue-stub.json"
+    kev_max_age_days: 7

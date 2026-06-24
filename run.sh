@@ -147,9 +147,22 @@ require_client() {
 
 run_wardex() {
   require_client wardex
+  local dir="./clients/$CLIENT"
+
+  # Ensure reports dir is writable by container user
+  mkdir -p "$dir/reports"
+  chmod 777 "$dir/reports"
+
   echo "[*] Running Wardex gate for client: $CLIENT"
-  docker compose --profile wardex up --build --abort-on-container-exit || true
-  echo "[+] Wardex report written to clients/$CLIENT/reports/"
+  docker compose run --rm --build \
+    -e CLIENT="$CLIENT" \
+    -e WARDEX_ACCEPT_SECRET="${WARDEX_ACCEPT_SECRET:-wardex-lab-dev-secret-not-for-prod}" \
+    --user "$(id -u):$(id -g)" \
+    wardex evaluate \
+    --config client/wardex/wardex-config.yaml \
+    --evidence client/wardex/wardex-vulns.yaml \
+    client/wardex/controls.yaml || true
+  echo "[+] Wardex output written to $dir/reports/"
 }
 
 run_cra_check() {
@@ -177,6 +190,7 @@ run_compliance_report() {
   local dir="./clients/$CLIENT"
   local report="$dir/reports/compliance-summary.md"
   mkdir -p "$dir/reports"
+  chmod 777 "$dir/reports"
 
   cat > "$report" << EOF
 # Compliance Summary — $CLIENT
@@ -189,15 +203,21 @@ EOF
   echo "  - Wardex config: $( [ -f "$dir/wardex/wardex-config.yaml" ] && echo 'present' || echo 'missing' )" >> "$report"
   echo "  - Wardex vulns: $( [ -f "$dir/wardex/wardex-vulns.yaml" ] && echo 'present' || echo 'missing' )" >> "$report"
 
-  if [ -f "$dir/reports/wardex-report.json" ]; then
+  if [ -f "$dir/reports/wardex-gate-audit.log" ]; then
     local status
     status=$(python3 -c "
 import json,sys
-d=json.load(open('$dir/reports/wardex-report.json'))
+with open('$dir/reports/wardex-gate-audit.log') as f:
+    last = f.readlines()[-1]
+d=json.loads(last)
 print(d.get('status', 'unknown'))
 " 2>/dev/null || echo "parse-error")
     echo "  - Wardex gate status: $status" >> "$report"
   fi
+
+  local art14_count
+  art14_count=$(ls "$dir"/reports/wardex-art14-*.json 2>/dev/null | wc -l)
+  echo "  - Article 14 artefacts: $art14_count" >> "$report"
 
   echo "[+] Compliance report written to $report"
 }

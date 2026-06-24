@@ -1,15 +1,35 @@
-# Wardex Configuration — Nexus Dynamics
-# CRA Art. 14 compliance gate
+# Wardex Configuration — Nexus Dynamics (v2.1.2)
+# Standard product (Art. 6), SaaS manufacturing, low maturity
 
-thresholds:
-  critical_vulnerabilities: 0
-  high_vulnerabilities: 2
+release_gate:
+  enabled: true
+  risk_appetite: 0.35
+  warn_above: 0.20
+  mode: "any"
+  asset_context:
+    criticality: 0.65
+    internet_facing: true
+    requires_auth: true
+    environment: "production"
+  compensating_controls: []
 
-output:
+acceptance:
+  limits:
+    max_acceptance_days: 90
+    min_justification_chars: 20
+    max_report_age_hours: 24
+
+reporting:
   format: "json"
-  file: "wardex-report.json"
-  roadmap_limit: 10
+  output: "reports/wardex-report.json"
+  gate_log:
+    path: "reports/wardex-gate-audit.log"
 
-security:
-  enforce_actor_trust: false
-  fail_close_default: 1.0
+cra:
+  art14:
+    output_dir: "reports"
+    awareness_source: "detection"
+    product_name: "NexusFlow"
+    product_version: "2.3"
+    kev_path: "kev-catalogue-stub.json"
+    kev_max_age_days: 7
