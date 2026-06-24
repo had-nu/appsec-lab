@@ -4,64 +4,64 @@
   "dateReleased": "2026-06-01T00:00:00Z",
   "vulnerabilities": [
     {
-      "cveID": "CWE-502",
+      "cveID": "CVE-2025-61622",
       "vendorProject": "Aethon Security",
       "product": "AethonShield",
-      "vulnerabilityName": "Insecure Deserialization in Agent RPC Channel",
+      "vulnerabilityName": "CWE-502: Insecure Deserialization in Agent RPC Channel",
       "dateAdded": "2026-03-15T00:00:00Z",
       "shortDescription": "Insecure deserialization in AethonShield agent communication channel allows RCE on SIEM server",
       "requiredAction": "Apply patch or discontinue use of AethonShield agent",
       "dueDate": "2026-04-05T00:00:00Z",
       "knownRansomwareCampaignUse": "Known",
-      "notes": "Educational stub — Aethon Security. Security product vulnerability enables total SIEM compromise."
+      "notes": "Educational stub — Aethon Security. CVE-2025-61622 originally Apache PyFury; adapted for SIEM agent RPC. Security product vulnerability enables total SIEM compromise."
     },
     {
-      "cveID": "CWE-306",
+      "cveID": "CVE-2024-55591",
       "vendorProject": "Aethon Security",
       "product": "AethonShield",
-      "vulnerabilityName": "Missing Authentication on Log Ingestion API",
+      "vulnerabilityName": "CWE-306: Missing Authentication on Log Ingestion API",
       "dateAdded": "2026-04-01T00:00:00Z",
       "shortDescription": "AethonShield log ingestion API accepts logs without any authentication — log injection and data poisoning possible",
       "requiredAction": "Implement authentication on ingestion API before use",
       "dueDate": "2026-04-22T00:00:00Z",
       "knownRansomwareCampaignUse": "Unknown",
-      "notes": "Educational stub — Aethon Security. Log ingestion without auth enables massive data poisoning."
+      "notes": "Educational stub — Aethon Security. CVE-2024-55591 originally FortiOS; adapted for SIEM ingestion. Log ingestion without auth enables massive data poisoning."
     },
     {
-      "cveID": "CWE-269",
+      "cveID": "CVE-2024-5907",
       "vendorProject": "Aethon Security",
       "product": "AethonShield",
-      "vulnerabilityName": "Privilege Escalation via Endpoint Agent Installer",
+      "vulnerabilityName": "CWE-269: Privilege Escalation via Endpoint Agent Installer",
       "dateAdded": "2026-05-01T00:00:00Z",
       "shortDescription": "AethonShield endpoint agent installer runs with elevated privileges allowing privilege escalation on host",
       "requiredAction": "Issue patched installer immediately and revoke existing agent tokens",
       "dueDate": "2026-05-22T00:00:00Z",
       "knownRansomwareCampaignUse": "Known",
-      "notes": "Educational stub — Aethon Security. Agent privilege escalation enables full endpoint compromise."
+      "notes": "Educational stub — Aethon Security. CVE-2024-5907 originally Palo Alto Cortex XDR; adapted for endpoint agent. Agent privilege escalation enables full endpoint compromise."
     },
     {
-      "cveID": "CWE-89",
+      "cveID": "CVE-2024-27298",
       "vendorProject": "Aethon Security",
       "product": "AethonShield",
-      "vulnerabilityName": "SQL Injection in SIEM Search Engine",
+      "vulnerabilityName": "CWE-89: SQL Injection in SIEM Search Engine",
       "dateAdded": "2026-03-15T00:00:00Z",
       "shortDescription": "SQL injection in AethonShield search engine allowing access to all customer security event data",
       "requiredAction": "Apply patch immediately and rotate all stored credentials",
       "dueDate": "2026-04-05T00:00:00Z",
       "knownRansomwareCampaignUse": "Known",
-      "notes": "Educational stub — Aethon Security. Class II product — multi-tenant data breach possible."
+      "notes": "Educational stub — Aethon Security. CVE-2024-27298 originally Parse Server; adapted for SIEM search. Class II product — multi-tenant data breach possible."
     },
     {
-      "cveID": "CWE-798",
+      "cveID": "CVE-2024-46612",
       "vendorProject": "Aethon Security",
       "product": "AethonShield",
-      "vulnerabilityName": "Hardcoded Agent Credentials in Binary",
+      "vulnerabilityName": "CWE-798: Hardcoded Agent Credentials in Binary",
       "dateAdded": "2026-05-15T00:00:00Z",
       "shortDescription": "Hardcoded credentials in AethonShield endpoint agent binary allow lateral movement across customer networks",
       "requiredAction": "Rotate agent credentials and issue patched binaries",
       "dueDate": "2026-06-05T00:00:00Z",
       "knownRansomwareCampaignUse": "Unknown",
-      "notes": "Educational stub — Aethon Security. Agent credentials enable lateral movement in enterprise networks."
+      "notes": "Educational stub — Aethon Security. CVE-2024-46612 originally IceCMS; adapted for endpoint agent. Agent credentials enable lateral movement in enterprise networks."
     }
   ]
 }

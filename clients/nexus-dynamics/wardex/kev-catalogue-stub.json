@@ -4,10 +4,10 @@
   "dateReleased": "2026-06-01T00:00:00Z",
   "vulnerabilities": [
     {
-      "cveID": "CWE-89",
+      "cveID": "CVE-2024-27298",
       "vendorProject": "Nexus Dynamics",
       "product": "NexusFlow",
-      "vulnerabilityName": "SQL Injection in Production Search API",
+      "vulnerabilityName": "CWE-89: SQL Injection in Production Search API",
       "dateAdded": "2026-03-15T00:00:00Z",
       "shortDescription": "SQL injection in NexusFlow search endpoint allowing unauthenticated RCE on manufacturing database",
       "requiredAction": "Apply patch per vendor instructions or discontinue use",
@@ -16,10 +16,10 @@
       "notes": "Educational stub — Nexus Dynamics. Active exploitation observed in manufacturing sector."
     },
     {
-      "cveID": "CWE-798",
+      "cveID": "CVE-2024-53356",
       "vendorProject": "Nexus Dynamics",
       "product": "NexusFlow",
-      "vulnerabilityName": "Hardcoded Database Credentials in Configuration",
+      "vulnerabilityName": "CWE-798: Hardcoded Database Credentials in Configuration",
       "dateAdded": "2026-04-10T00:00:00Z",
       "shortDescription": "Hardcoded database credentials in NexusFlow production configuration",
       "requiredAction": "Rotate credentials immediately and implement credential vault",

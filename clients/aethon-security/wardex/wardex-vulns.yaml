@@ -5,7 +5,8 @@
 converted_by: "manual/appsec-lab"
 vulnerabilities:
   # ── Críticas ──
-  - cve_id: "CWE-502"
+  - cve_id: "CVE-2025-61622"
+    cwe_id: "CWE-502"
     cvss_base: 9.8
     epss_score: 0.68
     component: "aethon-shield/agent/rpc.cpp (insecure deserialization — canal agente-SIEM)"
@@ -13,125 +14,160 @@ vulnerabilities:
     actively_exploited: true
     actively_exploited_since: "2026-03-15T00:00:00Z"
     exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-61622"
 
-  - cve_id: "CWE-306"
-    cvss_base: 9.4
+  - cve_id: "CVE-2024-55591"
+    cwe_id: "CWE-306"
+    cvss_base: 9.8
     epss_score: 0.75
     component: "aethon-shield/api/ingest.js (missing auth — API ingestão de logs)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-04-01T00:00:00Z"
     exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-55591"
 
-  - cve_id: "CWE-78"
-    cvss_base: 9.3
+  - cve_id: "CVE-2025-68154"
+    cwe_id: "CWE-78"
+    cvss_base: 8.1
     epss_score: 0.62
     component: "aethon-shield/pipeline/processor.js (OS command injection — pipeline logs)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-68154"
 
-  - cve_id: "CWE-269"
-    cvss_base: 8.8
+  - cve_id: "CVE-2024-5907"
+    cwe_id: "CWE-269"
+    cvss_base: 7.0
     epss_score: 0.55
     component: "aethon-shield/agent/installer.cpp (privilege escalation — agente)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-05-01T00:00:00Z"
     exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-5907"
 
-  - cve_id: "CWE-89"
-    cvss_base: 9.8
+  - cve_id: "CVE-2024-27298"
+    cwe_id: "CWE-89"
+    cvss_base: 10.0
     epss_score: 0.92
     component: "aethon-shield/api/search.js (SQL injection — motor de busca SIEM)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-03-15T00:00:00Z"
     exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-27298"
 
-  - cve_id: "CWE-287"
+  - cve_id: "CVE-2024-47073"
+    cwe_id: "CWE-287"
     cvss_base: 9.1
     epss_score: 0.60
-    component: "aethon-shield/api/auth.js (weak auth — tokens previsíveis)"
+    component: "aethon-shield/api/auth.js (weak auth — JWT sem verificação de assinatura)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-47073"
 
   # ── Altas ──
-  - cve_id: "CWE-285"
+  - cve_id: "CVE-2025-43790"
+    cwe_id: "CWE-285"
     cvss_base: 8.1
     epss_score: 0.48
     component: "aethon-shield/api/multitenant.js (IDOR — isolamento inquilinos)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-43790"
 
-  - cve_id: "CWE-347"
-    cvss_base: 8.1
+  - cve_id: "CVE-2025-59718"
+    cwe_id: "CWE-347"
+    cvss_base: 9.8
     epss_score: 0.30
     component: "aethon-shield/updater/verify.js (unsigned agent update)"
     reachable: true
-    actively_exploited: false
+    actively_exploited: true
+    actively_exploited_since: "2026-05-01T00:00:00Z"
+    exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-59718"
 
-  - cve_id: "CWE-79"
-    cvss_base: 8.7
+  - cve_id: "CVE-2024-56357"
+    cwe_id: "CWE-79"
+    cvss_base: 8.1
     epss_score: 0.82
     component: "aethon-shield/ui/dashboard.js (stored XSS — dashboards/alertas)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-56357"
 
-  - cve_id: "CWE-22"
-    cvss_base: 8.1
+  - cve_id: "CVE-2025-27210"
+    cwe_id: "CWE-22"
+    cvss_base: 7.5
     epss_score: 0.32
     component: "aethon-shield/api/logs.js (path traversal — leitura logs arbitrários)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-27210"
 
-  - cve_id: "CWE-400"
+  - cve_id: "CVE-2025-65637"
+    cwe_id: "CWE-400"
     cvss_base: 7.5
     epss_score: 0.30
     component: "aethon-shield/pipeline/ingest.js (uncontrolled resource — DoS via log injection)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-65637"
 
   # ── Médias ──
-  - cve_id: "CWE-117"
-    cvss_base: 7.3
+  - cve_id: "CVE-2026-5078"
+    cwe_id: "CWE-117"
+    cvss_base: 8.7
     epss_score: 0.38
     component: "aethon-shield/pipeline/format.js (log forging — injeção de logs falsos)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2026-5078"
 
-  - cve_id: "CWE-319"
-    cvss_base: 7.4
+  - cve_id: "CVE-2024-49387"
+    cwe_id: "CWE-319"
+    cvss_base: 7.5
     epss_score: 0.35
     component: "aethon-shield/agent/channel.cpp (cleartext — agente-SIEM sem TLS)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-49387"
 
-  - cve_id: "CWE-311"
-    cvss_base: 6.5
+  - cve_id: "CVE-2024-25024"
+    cwe_id: "CWE-311"
+    cvss_base: 5.5
     epss_score: 0.20
     component: "aethon-shield/storage/logs.js (logs armazenados sem cifra)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-25024"
 
-  - cve_id: "CWE-276"
-    cvss_base: 7.3
+  - cve_id: "CVE-2024-11872"
+    cwe_id: "CWE-276"
+    cvss_base: 7.8
     epss_score: 0.28
     component: "aethon-shield/agent/install.sh (default permissions — diretório world-writable)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-11872"
 
-  - cve_id: "CWE-200"
-    cvss_base: 7.5
+  - cve_id: "CVE-2024-37162"
+    cwe_id: "CWE-200"
+    cvss_base: 5.3
     epss_score: 0.30
     component: "aethon-shield/api/export.js (data leakage — exposição logs de clientes)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-37162"
 
-  - cve_id: "CWE-798"
-    cvss_base: 7.5
+  - cve_id: "CVE-2024-46612"
+    cwe_id: "CWE-798"
+    cvss_base: 9.8
     epss_score: 0.40
     component: "aethon-shield/agent/config.c (hardcoded agent credentials)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-05-15T00:00:00Z"
     exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-46612"

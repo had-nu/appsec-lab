@@ -4,107 +4,135 @@
 
 converted_by: "manual/appsec-lab"
 vulnerabilities:
-  # ── Criticas ──
-  - cve_id: "CWE-89"
-    cvss_base: 9.8
+  # ── Críticas ──
+  - cve_id: "CVE-2024-27298"
+    cwe_id: "CWE-89"
+    cvss_base: 10.0
     epss_score: 0.92
     component: "nexus-flow/src/api/search.js (SQL injection — API de ordens)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-03-15T00:00:00Z"
     exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-27298"
 
-  - cve_id: "CWE-918"
-    cvss_base: 8.6
+  - cve_id: "CVE-2024-29415"
+    cwe_id: "CWE-918"
+    cvss_base: 8.1
     epss_score: 0.45
     component: "nexus-flow/src/integrations/webhook.js (SSRF — integração fornecedores)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-29415"
 
-  - cve_id: "CWE-285"
-    cvss_base: 8.1
+  - cve_id: "CVE-2025-3013"
+    cwe_id: "CWE-285"
+    cvss_base: 8.3
     epss_score: 0.52
     component: "nexus-flow/src/api/orders.js (IDOR — acesso ordens de produção)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-3013"
 
   # ── Altas ──
-  - cve_id: "CWE-798"
-    cvss_base: 7.5
+  - cve_id: "CVE-2024-53356"
+    cwe_id: "CWE-798"
+    cvss_base: 9.8
     epss_score: 0.45
     component: "nexus-flow/config/database.js (hardcoded credentials)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-04-10T00:00:00Z"
     exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-53356"
 
-  - cve_id: "CWE-287"
-    cvss_base: 7.3
+  - cve_id: "CVE-2024-54150"
+    cwe_id: "CWE-287"
+    cvss_base: 8.7
     epss_score: 0.52
-    component: "nexus-flow/src/auth/login.js (weak JWT — token previsível)"
+    component: "nexus-flow/src/auth/login.js (weak JWT — algorithm confusion)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-54150"
 
-  - cve_id: "CWE-79"
-    cvss_base: 6.1
+  - cve_id: "CVE-2024-56357"
+    cwe_id: "CWE-79"
+    cvss_base: 8.1
     epss_score: 0.78
     component: "nexus-flow/src/ui/comments.js (stored XSS — comentários em ordens)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-56357"
 
-  - cve_id: "CWE-22"
+  - cve_id: "CVE-2025-27210"
+    cwe_id: "CWE-22"
     cvss_base: 7.5
     epss_score: 0.34
     component: "nexus-flow/src/api/reports.js (path traversal — download relatórios)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-27210"
 
-  - cve_id: "CWE-352"
-    cvss_base: 6.5
+  - cve_id: "CVE-2024-20252"
+    cwe_id: "CWE-352"
+    cvss_base: 9.6
     epss_score: 0.40
     component: "nexus-flow/src/api/state.js (CSRF — sem tokens em alterações de estado)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-20252"
 
   # ── Médias ──
-  - cve_id: "CWE-200"
+  - cve_id: "CVE-2024-37162"
+    cwe_id: "CWE-200"
     cvss_base: 5.3
     epss_score: 0.18
     component: "nexus-flow/src/middleware/error.js (stack trace em erro 500)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-37162"
 
-  - cve_id: "CWE-523"
-    cvss_base: 7.4
+  - cve_id: "CVE-2024-1509"
+    cwe_id: "CWE-523"
+    cvss_base: 7.6
     epss_score: 0.25
     component: "nexus-flow/src/internal/api.js (comunicação interna sem TLS)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-1509"
 
-  - cve_id: "CWE-620"
-    cvss_base: 6.1
+  - cve_id: "CVE-2024-48887"
+    cwe_id: "CWE-620"
+    cvss_base: 9.8
     epss_score: 0.22
     component: "nexus-flow/src/auth/reset.js (password change sem verificação)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-48887"
 
-  - cve_id: "CWE-916"
-    cvss_base: 5.9
+  - cve_id: "CVE-2024-24553"
+    cwe_id: "CWE-916"
+    cvss_base: 7.5
     epss_score: 0.21
-    component: "nexus-flow/src/auth/hash.js (MD5 — weak password hashing)"
+    component: "nexus-flow/src/auth/hash.js (SHA-1 — weak password hashing)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-24553"
 
-  - cve_id: "CWE-614"
-    cvss_base: 5.3
+  - cve_id: "CVE-2024-47833"
+    cwe_id: "CWE-614"
+    cvss_base: 6.5
     epss_score: 0.15
     component: "nexus-flow/src/middleware/session.js (cookie sem Secure flag)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-47833"
 
-  - cve_id: "CWE-1104"
-    cvss_base: 5.5
+  - cve_id: "CVE-2025-10220"
+    cwe_id: "CWE-1104"
+    cvss_base: 9.8
     epss_score: 0.12
-    component: "nexus-flow/package.json (dependency não mantida — 3 anos sem update)"
+    component: "nexus-flow/package.json (dependency não mantida — NuGet packages obsoletos)"
     reachable: false
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-10220"

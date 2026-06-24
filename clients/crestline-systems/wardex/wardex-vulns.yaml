@@ -5,115 +5,145 @@
 converted_by: "manual/appsec-lab"
 vulnerabilities:
   # ── Críticas ──
-  - cve_id: "CWE-306"
-    cvss_base: 9.4
+  - cve_id: "CVE-2024-55591"
+    cwe_id: "CWE-306"
+    cvss_base: 9.8
     epss_score: 0.72
     component: "edge-sentry/ot/api/auth.js (missing auth — API OT)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-03-15T00:00:00Z"
     exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-55591"
 
-  - cve_id: "CWE-77"
-    cvss_base: 9.1
+  - cve_id: "CVE-2025-60021"
+    cwe_id: "CWE-77"
+    cvss_base: 9.8
     epss_score: 0.65
     component: "edge-sentry/cli/admin.c (OS command injection — CLI gestão)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-04-10T00:00:00Z"
     exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-60021"
 
-  - cve_id: "CWE-787"
-    cvss_base: 9.1
+  - cve_id: "CVE-2024-10918"
+    cwe_id: "CWE-787"
+    cvss_base: 9.8
     epss_score: 0.42
     component: "edge-sentry/protocols/modbus.c (out-of-bounds write — parser Modbus)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-10918"
 
-  - cve_id: "CWE-89"
-    cvss_base: 9.8
+  - cve_id: "CVE-2024-27298"
+    cwe_id: "CWE-89"
+    cvss_base: 10.0
     epss_score: 0.92
     component: "edge-sentry/api/query.js (SQL injection — interface dados OT)"
     reachable: true
     actively_exploited: true
     actively_exploited_since: "2026-03-15T00:00:00Z"
     exploited_source: "cisa-kev"
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-27298"
 
-  - cve_id: "CWE-798"
-    cvss_base: 9.3
+  - cve_id: "CVE-2024-46612"
+    cwe_id: "CWE-798"
+    cvss_base: 9.8
     epss_score: 0.62
     component: "edge-sentry/firmware/config.c (hardcoded admin creds na firmware)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-46612"
 
   # ── Altas ──
-  - cve_id: "CWE-347"
-    cvss_base: 8.1
+  - cve_id: "CVE-2024-47943"
+    cwe_id: "CWE-347"
+    cvss_base: 9.8
     epss_score: 0.32
     component: "edge-sentry/updater/verify.c (unsigned firmware update)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-47943"
 
-  - cve_id: "CWE-494"
-    cvss_base: 8.8
+  - cve_id: "CVE-2024-47867"
+    cwe_id: "CWE-494"
+    cvss_base: 7.5
     epss_score: 0.35
     component: "edge-sentry/updater/download.c (download sem integrity check)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-47867"
 
-  - cve_id: "CWE-294"
-    cvss_base: 8.3
+  - cve_id: "CVE-2024-38890"
+    cwe_id: "CWE-294"
+    cvss_base: 8.4
     epss_score: 0.42
     component: "edge-sentry/protocols/modbus.c (replay attack — sem nonce)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-38890"
 
-  - cve_id: "CWE-120"
-    cvss_base: 8.5
+  - cve_id: "CVE-2024-8748"
+    cwe_id: "CWE-120"
+    cvss_base: 7.5
     epss_score: 0.38
     component: "edge-sentry/network/packet.c (buffer overflow — parsing pacotes)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-8748"
 
-  - cve_id: "CWE-862"
-    cvss_base: 7.5
+  - cve_id: "CVE-2024-10575"
+    cwe_id: "CWE-862"
+    cvss_base: 9.8
     epss_score: 0.35
     component: "edge-sentry/api/admin.js (missing authorization — endpoints OT)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-10575"
 
-  - cve_id: "CWE-319"
-    cvss_base: 7.4
+  - cve_id: "CVE-2024-49387"
+    cwe_id: "CWE-319"
+    cvss_base: 7.5
     epss_score: 0.40
     component: "edge-sentry/protocols/modbus.c (cleartext — Modbus sem TLS)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-49387"
 
-  - cve_id: "CWE-22"
-    cvss_base: 8.5
+  - cve_id: "CVE-2024-21896"
+    cwe_id: "CWE-22"
+    cvss_base: 9.8
     epss_score: 0.30
     component: "edge-sentry/cli/log.c (path traversal — logs do sistema)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-21896"
 
   # ── Médias ──
-  - cve_id: "CWE-276"
-    cvss_base: 7.8
+  - cve_id: "CVE-2024-37038"
+    cwe_id: "CWE-276"
+    cvss_base: 8.8
     epss_score: 0.25
     component: "edge-sentry/config/settings.c (world-writable config)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-37038"
 
-  - cve_id: "CWE-311"
-    cvss_base: 7.5
+  - cve_id: "CVE-2025-10227"
+    cwe_id: "CWE-311"
+    cvss_base: 4.6
     epss_score: 0.20
     component: "edge-sentry/storage/data.c (OT data stored in plaintext)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2025-10227"
 
-  - cve_id: "CWE-200"
+  - cve_id: "CVE-2024-29987"
+    cwe_id: "CWE-200"
     cvss_base: 6.5
     epss_score: 0.25
     component: "edge-sentry/api/info.js (topology disclosure — mapa OT exposto)"
     reachable: true
     actively_exploited: false
+    real_cve_ref: "https://nvd.nist.gov/vuln/detail/CVE-2024-29987"
